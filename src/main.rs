@@ -1,4 +1,7 @@
+mod render;
 use clap::{Parser, Subcommand};
+use render::Render;
+use std::fs;
 
 /// Simple program to greet a person
 #[derive(Parser)]
@@ -14,12 +17,19 @@ enum Commands {
     Rust,
     Go,
 }
-
 fn main() {
     let cli = Cli::parse();
     match &cli.language {
         Some(Commands::Rust) => {
-            println!("Rust");
+            // create lib.rs at the current directory
+            println!("create lib.rs at the current directory");
+            match fs::exists("./lib.rs") {
+                Ok(true) => println!("already has lib.rs, overwrite it."),
+                Ok(false) => println!("lib.rs not exist, create new one"),
+                _ => (),
+            }
+            let mut rs = render::rust::RustLang::new("./lib.rs");
+            rs.render_unit_test();
         }
         Some(Commands::Go) => {
             println!("Go");
