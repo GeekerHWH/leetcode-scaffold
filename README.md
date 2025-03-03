@@ -28,3 +28,7 @@ chmod u+x ./leetcode-scaffold && ./leetcode-scaffold rust
 - [ ] support go.
 - [ ] using looping to support endless test cases.
 - [ ] Github Actions for release.
+- [ ] grab leetcode description
+```bash
+curl GET "https://leetcode.cn/problems/${question_name}/description/"
+```
