@@ -1,3 +1,8 @@
+# cargo's cache
 target/
 
+# editor
 .vscode/
+
+# output artifacts
+lib.rs

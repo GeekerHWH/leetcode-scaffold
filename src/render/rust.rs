@@ -17,26 +17,31 @@ impl RustLang {
         RustLang {
             path: path.to_string(),
             unit_test_template: String::from(
-                r#"struct Solution;
+                r#"struct Solution {}
 
 // Copy paste the impl code block to your leetcode
 impl Solution {
-    // Edit your function below
-    pub fn search_insert(nums: Vec<i32>, target: i32) -> i32 {
-        Self::binary_search(&nums, &target) as i32
+    pub fn max_profit(prices: Vec<i32>) -> i32 {
+        let length = prices.len();
+        let mut dp = vec![[0i32; 2]; length];
+        dp[0][0] = 0;
+        dp[0][1] = -prices[0];
+        for (i, price) in prices.iter().enumerate() {
+            if i == 0 {
+                continue;
+            }
+            dp[i][0] = Self::max(&dp[i - 1][0], &(dp[i - 1][1] + *price));
+            dp[i][1] = Self::max(&dp[i - 1][1], &(dp[i - 1][0] - *price));
+        }
+        return dp[length - 1][0];
     }
 
-    fn binary_search(nums: &Vec<i32>, target: &i32) -> usize {
-        let (mut left, mut right) = (0, nums.len());
-        while left < right {
-            let mid = (left + right) >> 1;
-            if nums[mid] < *target {
-                left = mid + 1;
-            } else {
-                right = mid;
-            }
+    fn max(a: &i32, b: &i32) -> i32 {
+        if *a >= *b {
+            return *a;
+        } else {
+            return *b;
         }
-        left
     }
 }
 
@@ -46,13 +51,43 @@ mod tests {
 
     #[test]
     fn it_works() {
-        // Write your test case here
-        let nums = vec![1, 3, 5, 6];
-        let target = 5;
-        assert_eq!(2, Solution::search_insert(nums, target));
-        println!("finished")
+        // Define your test case here
+        struct TestCase<T> {
+            input: Vec<T>,
+            expect: T,
+        }
+        impl<T: Clone> TestCase<T> {
+            fn new(input: &Vec<T>, expect: T) -> TestCase<T> {
+                let input_copy = input.clone();
+                return TestCase {
+                    input: input_copy,
+                    expect: expect.clone(),
+                };
+            }
+            fn get_input(&self) -> Vec<T> {
+                return self.input.clone();
+            }
+            fn get_expect(&self) -> T {
+                return self.expect.clone();
+            }
+        }
+
+        // Define your test_case instances here
+        let test_cases = vec![
+            TestCase::new(&vec![7, 1, 5, 3, 6, 4], 7),
+            TestCase::new(&vec![1, 2, 3, 4, 5], 4),
+            TestCase::new(&vec![7, 6, 4, 3, 1], 0),
+        ];
+
+        // iterate all test_cases and assert them to be as expected
+        for test_case in test_cases.iter() {
+            let result = Solution::max_profit(test_case.get_input());
+
+            assert_eq!(result, test_case.get_expect());
+        }
     }
-}"#,
+}
+"#,
             ),
         }
     }
