@@ -1,5 +1,6 @@
 mod render;
 use clap::{Parser, Subcommand};
+use leetcode_scaffold::scaffold_scraper;
 use render::Render;
 use std::fs;
 
@@ -18,8 +19,16 @@ enum Commands {
     Rust,
     /// render template for go (Not Available for Now)
     Go,
+    /// get leetcode problem description
+    Leetcode {
+        /// url of the leetcode problem
+        #[arg(short, long)]
+        url: String,
+    },
 }
-fn main() {
+
+#[tokio::main]
+async fn main() {
     let cli = Cli::parse();
     match &cli.language {
         Some(Commands::Rust) => {
@@ -37,6 +46,12 @@ fn main() {
         }
         Some(Commands::Go) => {
             println!("Go");
+        }
+        Some(Commands::Leetcode { url }) => {
+            println!(
+                "{:?}",
+                scaffold_scraper::leetcode::get_leetcode_problem_description(url.to_string()).await
+            );
         }
         _ => {}
     }
