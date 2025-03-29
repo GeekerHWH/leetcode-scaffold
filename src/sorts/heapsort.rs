@@ -59,6 +59,18 @@ impl<'a> MaxHeap<'a> {
     }
 }
 
+/// a rust port of heap_sort using MaxHeap
+/// ## Example
+/// ```rust
+/// fn test_heap_sort() {
+///     let mut array = vec![5, 4, 2, 3, 1, 0];
+///     heap_sort(&mut array);
+///     assert_eq!(0, array[0]);
+///     assert_eq!(1, array[1]);
+///     assert_eq!(2, array[2]);
+///     assert_eq!(5, array[5]);
+/// }
+/// ```
 pub fn heap_sort(array: &mut Vec<i32>) {
     let mut max_heap = MaxHeap::new(array);
     let mut i = (max_heap.heap_size - 1) as usize;
