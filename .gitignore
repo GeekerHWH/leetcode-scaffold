@@ -5,4 +5,4 @@ target/
 .vscode/
 
 # output artifacts
-lib.rs
+./lib.rs
