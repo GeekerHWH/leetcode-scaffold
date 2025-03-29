@@ -1,7 +1,7 @@
 mod render;
 use clap::{Parser, Subcommand};
 use render::Render;
-use std::{fs, process::exit};
+use std::fs;
 
 /// Simple program to greet a person
 #[derive(Parser)]
@@ -14,7 +14,9 @@ struct Cli {
 
 #[derive(Subcommand)]
 enum Commands {
+    /// render template for rust
     Rust,
+    /// render template for go (Not Available for Now)
     Go,
 }
 fn main() {
