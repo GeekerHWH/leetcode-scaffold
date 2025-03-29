@@ -1,9 +1,6 @@
-use reqwest;
 use scraper::{Html, Selector};
 
-pub async fn get_leetcode_problem_description(url: String) -> String {
-    let body = reqwest::get(url).await.unwrap().text().await.unwrap();
-
+pub fn get_leetcode_problem_description(body: String) -> String {
     let html = Html::parse_document(&body);
     let selector = Selector::parse("meta[name='description']").unwrap();
     if let Some(element) = html.select(&selector).next() {

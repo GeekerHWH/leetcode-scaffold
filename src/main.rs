@@ -48,9 +48,10 @@ async fn main() {
             println!("Go");
         }
         Some(Commands::Leetcode { url }) => {
+            let body = reqwest::get(url).await.unwrap().text().await.unwrap();
             println!(
                 "{:?}",
-                scaffold_scraper::leetcode::get_leetcode_problem_description(url.to_string()).await
+                scaffold_scraper::leetcode::get_leetcode_problem_description(body)
             );
         }
         _ => {}
