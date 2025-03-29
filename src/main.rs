@@ -19,7 +19,7 @@ enum Commands {
     Rust,
     /// render template for go (Not Available for Now)
     Go,
-    /// get leetcode problem description
+    /// get leetcode problem description (Only for development)
     Leetcode {
         /// url of the leetcode problem
         #[arg(short, long)]
@@ -49,9 +49,8 @@ async fn main() {
         }
         Some(Commands::Leetcode { url }) => {
             let body = reqwest::get(url).await.unwrap().text().await.unwrap();
-            println!(
-                "{:?}",
-                scaffold_scraper::leetcode::get_leetcode_problem_description(body)
+            scaffold_scraper::leetcode::print_formatted_description(
+                &scaffold_scraper::leetcode::get_leetcode_problem_description(body),
             );
         }
         _ => {}

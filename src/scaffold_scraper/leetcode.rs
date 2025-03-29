@@ -1,5 +1,6 @@
 use scraper::{Html, Selector};
 
+// takes input of html body, and parses the problem description
 pub fn get_leetcode_problem_description(body: String) -> String {
     let html = Html::parse_document(&body);
     let selector = Selector::parse("meta[name='description']").unwrap();
@@ -15,4 +16,10 @@ pub fn get_leetcode_problem_description(body: String) -> String {
     }
 
     "无法获取题目描述".to_string()
+}
+
+pub fn print_formatted_description(content: &str) {
+    for line in content.lines() {
+        println!("{}", line);
+    }
 }
