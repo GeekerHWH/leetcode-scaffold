@@ -83,3 +83,32 @@ pub fn heap_sort(array: &mut Vec<i32>) {
         i -= 1;
     }
 }
+
+pub struct MaxPriorityQueue<'a> {
+    max_heap: &'a mut MaxHeap<'a>,
+}
+
+impl<'a> MaxPriorityQueue<'a> {
+    pub fn new(max_heap: &'a mut MaxHeap<'a>) -> Self {
+        max_heap.build_heap(max_heap.array.len() as i32);
+        return MaxPriorityQueue { max_heap };
+    }
+
+    pub fn maximum(&self) -> i32 {
+        return self.max_heap.get(0);
+    }
+
+    pub fn extract(&mut self) -> i32 {
+        (
+            self.max_heap.array[0],
+            self.max_heap.array[(self.max_heap.heap_size - 1) as usize],
+        ) = (
+            self.max_heap.array[(self.max_heap.heap_size - 1) as usize],
+            self.max_heap.array[0],
+        );
+
+        self.max_heap.heap_size -= 1;
+        self.max_heap.max_heapify(0);
+        self.max_heap.get(self.max_heap.heap_size as usize)
+    }
+}

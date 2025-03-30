@@ -2,7 +2,7 @@ use leetcode_scaffold::sorts;
 
 #[cfg(test)]
 mod tests {
-    use leetcode_scaffold::sorts::heapsort::heap_sort;
+    use leetcode_scaffold::sorts::heapsort::{heap_sort, MaxPriorityQueue};
 
     use super::*;
 
@@ -92,5 +92,13 @@ mod tests {
         assert_eq!(1, array[1]);
         assert_eq!(2, array[2]);
         assert_eq!(5, array[5]);
+    }
+
+    #[test]
+    fn test_maximum() {
+        let mut array = vec![0, 1, 2, 3, 4, 5];
+        let mut index_is_value_heap = sorts::heapsort::MaxHeap::new(&mut array);
+        let mut max_priority_queue = MaxPriorityQueue::new(&mut index_is_value_heap);
+        assert_eq!(5, max_priority_queue.maximum())
     }
 }
