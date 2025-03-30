@@ -5,4 +5,7 @@ target/
 .vscode/
 
 # output artifacts
+## rust's unit-test template is only one file
 ./lib.rs
+## go's unit-test template contains multiple file in a directory
+solution/

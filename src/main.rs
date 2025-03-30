@@ -45,7 +45,18 @@ async fn main() {
             }
         }
         Some(Commands::Go) => {
-            println!("Go");
+            // create a new directory for go files
+            let dir_path = "./solution";
+            match fs::create_dir_all(dir_path) {
+                Ok(_) => println!("Created directory: {}", dir_path),
+                Err(e) => println!("Failed to create directory: {}", e),
+            }
+
+            let mut go = render::go::GoLang::new(dir_path);
+            match go.render_unit_test() {
+                Ok(_) => println!("Successfully rendered Go templates"),
+                Err(err) => println!("Failed to render Go templates: {}", err),
+            }
         }
         Some(Commands::Leetcode { url }) => {
             let body = reqwest::get(url).await.unwrap().text().await.unwrap();
