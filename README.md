@@ -4,7 +4,7 @@ and rendering is idempotent. It's under development right now for personal Rust-
 journey.
 
 ### FAQs
-1. why do I need leetcode-scaffold?
+1. Why do I need leetcode-scaffold?
 
 While leetcode offers a great test cases integration on web, it charges you fees
 for premium-only debugging online. Even if you can debugging online, it is inconvenient
@@ -12,7 +12,11 @@ for people who work on strong type languages like Rust to debug without intellis
 
 Secondly, if you want to leetcode at work, (e.g. you are going to be fired, or you want to change job), you'd better not to be found out by your boss.
 
-2. how to use it?
+2. Available platforms?
+
+For now, it only supports Linux and MacOS, with VSCode as the default editor.
+
+3. How to use it?
 
 using python3 to execute templates/leetcode-problem-list.py, which will upgrade the templates/leetcode-problems.yaml
 
@@ -35,8 +39,9 @@ chmod u+x ./leetcode-scaffold
 exploring the unit test template, and all done!
 
 3. to do list OR roadmap?
-
+- [x] Github Actions to unit test all branches
 - [ ] Github Actions to release binary for different platforms
 - [ ] Grab leetcode description and inject it into template
 - [ ] Containerize it for users who don't want to install rust and compile it
-- [ ] support go template
+- [x] support Go template
+- [ ] support TypeScript template

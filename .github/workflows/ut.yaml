@@ -16,4 +16,5 @@ jobs:
       - run: echo "Running unit test in ${{ github.ref }} branch, executing ${{ github.workspace }}/ci/ut.sh"
       - name: Run unit test
         run: bash ${{ github.workspace }}/ci/ut.sh
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+      - name: Check unit test result
+        run: echo "🍏 This job's status is ${{ job.status }}."
