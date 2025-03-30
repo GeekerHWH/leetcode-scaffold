@@ -1,8 +1,4 @@
-use std::{
-    fs::{File, OpenOptions},
-    io::Write,
-    string,
-};
+use std::{fs::OpenOptions, io::Write};
 
 use super::Render;
 

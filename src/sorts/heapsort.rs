@@ -33,7 +33,7 @@ impl<'a> MaxHeap<'a> {
         let r: usize = self.right(i);
 
         // find largest element's index
-        let mut largest: usize = 0;
+        let mut largest: usize;
         if (l as i32) < self.heap_size && self.array[i] < self.array[l] {
             largest = l
         } else {
@@ -51,7 +51,7 @@ impl<'a> MaxHeap<'a> {
 
     pub fn build_heap(&mut self, n: i32) {
         self.heap_size = n;
-        let mut i: i32 = ((self.heap_size - 1) / 2);
+        let mut i: i32 = (self.heap_size - 1) / 2;
         while i >= 0 {
             self.max_heapify(i as usize);
             i -= 1;
@@ -61,7 +61,9 @@ impl<'a> MaxHeap<'a> {
 
 /// a rust port of heap_sort using MaxHeap
 /// ## Example
-/// ```rust
+/// ```
+/// use leetcode_scaffold::sorts::heapsort::heap_sort;
+///
 /// fn test_heap_sort() {
 ///     let mut array = vec![5, 4, 2, 3, 1, 0];
 ///     heap_sort(&mut array);

@@ -1,0 +1,19 @@
+name: Unit Test
+run-name: 
+on: 
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+jobs:
+  unit-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - run: echo "Running unit test in ${{ github.ref }} branch, executing ${{ github.workspace }}/ci/ut.sh"
+      - name: Run unit test
+        run: bash ${{ github.workspace }}/ci/ut.sh
+      - run: echo "🍏 This job's status is ${{ job.status }}."
