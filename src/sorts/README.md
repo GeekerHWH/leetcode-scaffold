@@ -1,2 +1,2 @@
 ## sorts
-this folder contains sorts implemented by rust, personal learning stuffs.
+this folder contains data structures and algorithms in sorts chapter in **Introduction.to.Algorithms.4th.** implemented by rust, and personal learning stuffs.
