@@ -1,3 +1,5 @@
+use std::array;
+
 pub struct MaxHeap<'a> {
     array: &'a mut Vec<i32>,
     heap_size: i32,
@@ -110,5 +112,50 @@ impl<'a> MaxPriorityQueue<'a> {
         self.max_heap.heap_size -= 1;
         self.max_heap.max_heapify(0);
         self.max_heap.get(self.max_heap.heap_size as usize)
+    }
+
+    pub fn update_priority(&mut self, mut index: usize, value: i32) -> usize {
+        if self.max_heap.array[index] > value {
+            return index;
+        }
+        self.max_heap.array[index] = value;
+        while self.max_heap.array[index] > self.max_heap.array[self.max_heap.parent(index)] {
+            // swap
+            let parent_index = self.max_heap.parent(index);
+            (
+                self.max_heap.array[index],
+                self.max_heap.array[parent_index],
+            ) = (
+                self.max_heap.array[parent_index],
+                self.max_heap.array[index],
+            );
+            index = parent_index;
+
+            // prevent usize smaller than zero, which will cause panic
+            if index == 0 {
+                break;
+            }
+        }
+        return index;
+    }
+
+    pub fn insert(&mut self, value: i32) -> usize {
+        let n = self.max_heap.heap_size as usize;
+        if n < self.max_heap.array.len() {
+            self.max_heap.array[n] = value;
+            self.max_heap.heap_size += 1;
+            let relocated_index = self.update_priority(n, value);
+            return relocated_index;
+        } else {
+            // n is only possible to be equal to array.len
+            self.max_heap.array.push(value);
+            self.max_heap.heap_size += 1;
+            let relocated_index = self.update_priority(n, value);
+            return relocated_index;
+        }
+    }
+
+    pub fn len(&self) -> i32 {
+        return self.max_heap.heap_size;
     }
 }
