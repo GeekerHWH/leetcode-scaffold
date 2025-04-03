@@ -1,5 +1,3 @@
-use std::array;
-
 pub struct MaxHeap<'a> {
     array: &'a mut Vec<i32>,
     heap_size: i32,
