@@ -9,3 +9,5 @@ target/
 ./lib.rs
 ## go's unit-test template contains multiple file in a directory
 solution/
+## problem descriptions should be stored here as markdown
+problemsets/
