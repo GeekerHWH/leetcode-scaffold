@@ -3,6 +3,8 @@ A local unit test template render for Rust and Go. It is fully written in Rust,
 and rendering is idempotent. It's under development right now for personal Rust-learning
 journey.
 
+![Demo](images/poc.png)
+
 ### FAQs
 1. Why do I need leetcode-scaffold?
 
@@ -45,3 +47,4 @@ exploring the unit test template, and all done!
 - [ ] Containerize it for users who don't want to install rust and compile it
 - [x] support Go template
 - [ ] support TypeScript template
+- [ ] support web panel to track progress (personal frontend learning for now...)
